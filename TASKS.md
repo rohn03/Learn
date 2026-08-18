@@ -77,4 +77,27 @@ Review outcome: accepted. `start` transitions eligible tasks to `IN_PROGRESS`, r
 
 ## Next checkpoint
 
-Commit Tasks 01–06 together, then push the checkpoint. The next task will begin the first Spring Boot REST endpoint.
+Checkpoint complete: Tasks 01–06 are committed and pushed.
+
+## Current — Task 07: First Task REST endpoint
+
+Create a `TaskController` in a `controller` package.
+
+- Make it a Spring REST controller.
+- Add a `GET /api/tasks` endpoint.
+- Return an empty `List<Task>` for now. The HTTP response should be `[]`.
+- Do not add a service, database, repository, or hard-coded tasks yet.
+
+Review outcome: accepted. The endpoint maps `GET /api/tasks` and returns an empty JSON array.
+
+## Current — Task 08: Introduce a service with constructor injection
+
+Move the empty-list behaviour out of `TaskController`.
+
+- Create a `TaskService` in a `service` package and make it a Spring service.
+- Give it a method that returns an empty `List<Task>` for now.
+- Inject `TaskService` into `TaskController` through the controller constructor.
+- Make `getTasks()` delegate to the service method.
+- Do not use field injection, a repository, or a database yet.
+
+Run the application and verify `GET /api/tasks` still returns `[]`. Ask for a **hint** if constructor injection syntax is unclear, then say: **review my task 08**.
