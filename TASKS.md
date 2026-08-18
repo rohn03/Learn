@@ -79,7 +79,7 @@ Review outcome: accepted. `start` transitions eligible tasks to `IN_PROGRESS`, r
 
 Checkpoint complete: Tasks 01–06 are committed and pushed.
 
-## Current — Task 07: First Task REST endpoint
+## Completed — Task 07: First Task REST endpoint
 
 Create a `TaskController` in a `controller` package.
 
@@ -90,7 +90,7 @@ Create a `TaskController` in a `controller` package.
 
 Review outcome: accepted. The endpoint maps `GET /api/tasks` and returns an empty JSON array.
 
-## Current — Task 08: Introduce a service with constructor injection
+## Completed — Task 08: Introduce a service with constructor injection
 
 Move the empty-list behaviour out of `TaskController`.
 
@@ -101,3 +101,23 @@ Move the empty-list behaviour out of `TaskController`.
 - Do not use field injection, a repository, or a database yet.
 
 Run the application and verify `GET /api/tasks` still returns `[]`. Ask for a **hint** if constructor injection syntax is unclear, then say: **review my task 08**.
+
+Review outcome: accepted. `TaskController` takes `TaskService` through constructor injection with a `private final` field, and `getTasks()` delegates to the service, which returns an empty `List<Task>`.
+
+## Current — Task 09: Keep seeded tasks in the service
+
+Give `TaskService` its own in-memory collection of tasks so `GET /api/tasks` returns real data instead of an empty `[]`.
+
+- Add a private in-memory store (e.g. `List<Task>` or `Map<String, Task>`) inside `TaskService`.
+- Seed it with a couple of starter `Task` objects so the endpoint has something to return.
+- Change the service method to return the contents of that store.
+- Leave `TaskController` unchanged — it should still just call the service method.
+- Do not add a database, repository, or persistence layer yet.
+
+### Ready for review when
+
+- `GET /api/tasks` returns your seeded tasks as a JSON array (`id`, `title`, `description`, `status`).
+- The Gradle test suite passes.
+- You can explain why keeping mutable state inside a singleton `@Service` bean is only acceptable for a learning project, and what problem it creates in a real production app (hint: shared mutable state across requests and threads).
+
+Run the application and hit `GET /api/tasks`, then say: **review my task 09**.
