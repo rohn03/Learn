@@ -37,6 +37,18 @@ public class Task {
     }
 
     public void rename(String newTitle){
+
+        if(newTitle == null || newTitle.isBlank()) {
+            throw new IllegalArgumentException("Title must not be blank");
+        }
         this.title = newTitle;
+    }
+
+    public void start() {
+
+        if(this.status == TaskStatus.DONE) {
+            throw new IllegalStateException("Task is in DONE status");
+        }
+        this.status = TaskStatus.IN_PROGRESS;
     }
 }

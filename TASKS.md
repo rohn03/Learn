@@ -62,8 +62,19 @@ Make `rename` reject a null, empty, or whitespace-only title.
 - Add a test that verifies the exception and confirms the original title is unchanged.
 - Do not introduce Spring validation annotations yet; this is pure Java domain validation.
 
-Ask for a **hint** when ready. Then say: **review my task 05**.
+Review outcome: accepted. Validation occurs before mutation, so invalid renames preserve the existing title. Add separate null and empty-string test cases during a later test-coverage revision.
+
+## Current — Task 06: Start a task through a domain action
+
+Add a method to `Task` named `start`.
+
+- It changes the task status to `IN_PROGRESS`.
+- It must reject starting a task whose status is already `DONE` by throwing `IllegalStateException`.
+- Add tests for a successful start and for the rejected `DONE` case.
+- Do not modify fields directly from the test; call the domain method.
+
+Review outcome: accepted. `start` transitions eligible tasks to `IN_PROGRESS`, rejects `DONE` tasks, and the Gradle test suite passes.
 
 ## Next checkpoint
 
-Commit Tasks 01–03 together after running the Gradle test task locally in IntelliJ. Then start Task 04.
+Commit Tasks 01–06 together, then push the checkpoint. The next task will begin the first Spring Boot REST endpoint.
